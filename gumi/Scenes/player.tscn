@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cgjdcs0vt6xnt"]
+
+[ext_resource type="Script" uid="uid://2xpbgscc6jop" path="res://Characters/Player/player.gd" id="1_6t5aa"]
+[ext_resource type="Script" uid="uid://l1vfsx5hg4t4" path="res://Characters/Player/spring_arm_pivot.gd" id="2_vgqql"]
+[ext_resource type="Script" uid="uid://bqjb81ack0v41" path="res://Characters/Player/camera_3d.gd" id="3_fkybt"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f60y1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f60y1"]
+albedo_color = Color(1, 0.4117647, 0.101960786, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v0iea"]
+material = SubResource("StandardMaterial3D_f60y1")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v0iea"]
+
+[node name="Player" type="CharacterBody3D" unique_id=131186784]
+script = ExtResource("1_6t5aa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1308484346]
+mesh = SubResource("CapsuleMesh_f60y1")
+
+[node name="Face" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1109453701]
+transform = Transform3D(9.553427e-16, 4.371139e-09, 0.5, 0.5, -4.371139e-09, 0, 2.1855694e-08, 0.1, -2.1855694e-08, 0, 0.6, -0.402)
+mesh = SubResource("CylinderMesh_v0iea")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1745837833]
+shape = SubResource("CapsuleShape3D_v0iea")
+
+[node name="SpringArmPivot" type="Node3D" parent="." unique_id=1910755551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59905493, 0)
+script = ExtResource("2_vgqql")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" unique_id=1003607338]
+
+[node name="SpringPosition" type="Node3D" parent="SpringArmPivot/SpringArm3D" unique_id=1034007677]
+
+[node name="Camera3D" type="Camera3D" parent="SpringArmPivot" unique_id=1541801223]
+script = ExtResource("3_fkybt")
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=36903605]
+wait_time = 0.15
+one_shot = true
